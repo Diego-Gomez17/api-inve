@@ -8,6 +8,9 @@ from typing import List
 
 data = APIRouter()
 
+@data.get("/")
+def get_hello():
+    return {'hello':'world'}
 
 @data.get("/api/{table}/")
 def get_Analitica(table):
