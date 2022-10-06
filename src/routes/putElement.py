@@ -17,7 +17,12 @@ putElement = APIRouter()
 @putElement.put("/api/updateProduct/{area_id}",response_model=element_schema)
 def update_Analitica(data_update:general_schema,id:str):
     with engine.connect() as con:
-        con.execute(producto.update().values(name=data_update.name).where(producto.c.id==id))
+        con.execute(producto.update().values(name=data_update.name,
+                                            lote=data_update.lote,
+                                            fecha_ingreso=data_update.fecha_ingreso,
+                                            fecha_vencimiento=data_update.fecha_vencimiento,
+                                            cod_barra=data_update.cod_barra,
+                                            cantidad=data_update.cantidad).where(producto.c.id==id))
         result= con.execute(producto.select().where(producto.c.id==id)).first()
         return result
 
